@@ -32,6 +32,8 @@ call plug#begin('~/.vim/bundle')
 " syntastic
 Plug 'scrooloose/syntastic'
 
+Plug 'a.vim'
+
 " Group dependencies, vim-snippets depends on ultisnips
 " 代码片段快速插入 (snippets中,是代码片段资源,需要学习)
 " Snippets are separated from the engine. Add this if you want them:
@@ -132,6 +134,7 @@ Plug 'kien/rainbow_parentheses.vim'
 " 主题 solarized
 " solarized
 Plug 'altercation/vim-colors-solarized'
+Plug 'morhetz/gruvbox'
 " molokai
 " 主题 molokai
 Plug 'tomasr/molokai'
@@ -378,6 +381,7 @@ call plug#end()
     let g:ycm_collect_identifiers_from_tags_files = 1
     " 开启语法关键字补全
     let g:ycm_seed_identifiers_with_syntax=1
+	let g:ycm_confirm_extra_conf = 0
 
     "let g:ycm_seed_identifiers_with_syntax=1   "语言关键字补全, 不过python关键字都很短，所以，需要的自己打开
 
@@ -661,7 +665,7 @@ call plug#end()
     let g:solarized_termtrans=1
     let g:solarized_contrast="normal"
     let g:solarized_visibility="normal"
-    " let g:solarized_termcolors=256
+	let g:solarized_termcolors=256
 " }}}
 
 " molokai {{{
@@ -702,6 +706,7 @@ call plug#end()
     hi CtrlSpaceNormal   guifg=#839496 guibg=#021B25 guisp=#839496 gui=NONE ctermfg=12 ctermbg=0 cterm=NONE
     hi CtrlSpaceSearch   guifg=#cb4b16 guibg=NONE gui=bold ctermfg=9 ctermbg=NONE term=bold cterm=bold
     hi CtrlSpaceStatus   guifg=#839496 guibg=#002b36 gui=reverse term=reverse cterm=reverse ctermfg=12 ctermbg=8
+    nnoremap <silent><C-p> :CtrlSpace O<CR>
 " }}}
 
 
