@@ -572,6 +572,7 @@ call plug#end()
     let g:ctrlsf_confirm_save = 0
     " Note: cannot use <CR> or <C-m> for open
     " Use : <sapce> or <tab>
+	nnoremap <leader>sf :CtrlSFToggle<CR>
     let g:ctrlsf_mapping = {
         \ "open"  : "<Space>",
         \ "openb" : "O",
