@@ -31,7 +31,7 @@ call plug#begin('~/.vim/bundle')
 
 " syntastic
 Plug 'scrooloose/syntastic'
-
+Plug 'jlanzarotta/bufexplorer'
 Plug 'a.vim'
 Plug 'brookhong/cscope.vim'
 
@@ -535,7 +535,6 @@ call plug#end()
     let g:ctrlp_map = '<leader>p'
     let g:ctrlp_cmd = 'CtrlP'
     map <leader>f :CtrlPMRU<CR>
-    map <leader>b :CtrlPBuffer<CR>
     let g:ctrlp_custom_ignore = {
         \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
         \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
