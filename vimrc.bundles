@@ -860,7 +860,7 @@ call plug#end()
 	nnoremap  <leader>ff :call CscopeFind('f', expand('<cword>'))<CR>
 	" i: Find files #including this file
 	nnoremap  <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
-	let g:cscope_silent = 0
+	let g:cscope_silent = 1
 " }}}
 
 "------------------------------------------- end of configs --------------------------------------------
