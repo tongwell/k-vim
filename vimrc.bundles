@@ -31,7 +31,6 @@ call plug#begin('~/.vim/bundle')
 
 " syntastic
 Plug 'scrooloose/syntastic'
-Plug 'jlanzarotta/bufexplorer'
 Plug 'vim-scripts/a.vim'
 Plug 'brookhong/cscope.vim'
 " Group dependencies, vim-snippets depends on ultisnips
@@ -538,7 +537,6 @@ call plug#end()
         \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
         \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
         \ }
-	" let g:ctrlp_working_path_mode=0
 	let g:ctrlp_working_path_mode = 'ra'
     let g:ctrlp_match_window_bottom=1
     let g:ctrlp_max_height=15
@@ -546,12 +544,12 @@ call plug#end()
     let g:ctrlp_mruf_max=500
     let g:ctrlp_follow_symlinks=1
     " 如果安装了ag, 使用ag
-	if executable('ag')
-	" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-	" ag is fast enough that CtrlP doesn't need to cache
-	let g:ctrlp_use_caching = 0
-	endif
+    " if executable('ag')
+    " " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+    " let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+    " " ag is fast enough that CtrlP doesn't need to cache
+    " let g:ctrlp_use_caching = 0
+    " endif
 
     " ctrlpfunky
     " ctrlp插件1 - 不用ctag进行函数快速跳转
@@ -709,7 +707,8 @@ call plug#end()
     hi CtrlSpaceNormal   guifg=#839496 guibg=#021B25 guisp=#839496 gui=NONE ctermfg=12 ctermbg=0 cterm=NONE
     hi CtrlSpaceSearch   guifg=#cb4b16 guibg=NONE gui=bold ctermfg=9 ctermbg=NONE term=bold cterm=bold
     hi CtrlSpaceStatus   guifg=#839496 guibg=#002b36 gui=reverse term=reverse cterm=reverse ctermfg=12 ctermbg=8
-    nnoremap <silent><C-p> :CtrlSpace O<CR>
+    nnoremap <silent><C-p> :CtrlSpace o<CR>
+    map <leader>b :CtrlSpace h<CR>
 " }}}
 
 
