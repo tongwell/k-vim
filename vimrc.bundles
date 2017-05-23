@@ -32,7 +32,7 @@ call plug#begin('~/.vim/bundle')
 " syntastic
 Plug 'scrooloose/syntastic'
 Plug 'jlanzarotta/bufexplorer'
-Plug 'a.vim'
+Plug 'vim-scripts/a.vim'
 Plug 'brookhong/cscope.vim'
 " Group dependencies, vim-snippets depends on ultisnips
 " 代码片段快速插入 (snippets中,是代码片段资源,需要学习)
@@ -538,19 +538,20 @@ call plug#end()
         \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
         \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
         \ }
-    let g:ctrlp_working_path_mode=0
+	" let g:ctrlp_working_path_mode=0
+	let g:ctrlp_working_path_mode = 'ra'
     let g:ctrlp_match_window_bottom=1
     let g:ctrlp_max_height=15
     let g:ctrlp_match_window_reversed=0
     let g:ctrlp_mruf_max=500
     let g:ctrlp_follow_symlinks=1
     " 如果安装了ag, 使用ag
-    " if executable('ag')
-    " " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-    " let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-    " " ag is fast enough that CtrlP doesn't need to cache
-    " let g:ctrlp_use_caching = 0
-    " endif
+	if executable('ag')
+	" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+	" ag is fast enough that CtrlP doesn't need to cache
+	let g:ctrlp_use_caching = 0
+	endif
 
     " ctrlpfunky
     " ctrlp插件1 - 不用ctag进行函数快速跳转
@@ -569,6 +570,7 @@ call plug#end()
     " let g:ctrlsf_winsize = '30%'
     let g:ctrlsf_auto_close = 0
     let g:ctrlsf_confirm_save = 0
+	let g:ctrlsf_default_root = 'project'
     " Note: cannot use <CR> or <C-m> for open
     " Use : <sapce> or <tab>
 	nnoremap <leader>sf :CtrlSFToggle<CR>
