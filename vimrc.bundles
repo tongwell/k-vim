@@ -33,6 +33,7 @@ call plug#begin('~/.vim/bundle')
 Plug 'scrooloose/syntastic'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'vim-scripts/a.vim'
+Plug 'ianva/vim-youdao-translater'
 Plug 'brookhong/cscope.vim'
 " Group dependencies, vim-snippets depends on ultisnips
 " 代码片段快速插入 (snippets中,是代码片段资源,需要学习)
@@ -862,6 +863,9 @@ call plug#end()
 	" i: Find files #including this file
 	nnoremap  <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
 	let g:cscope_silent = 1
+" }}}
+" youdao {{{
+nnoremap <leader>t : <C-u>Ydc<CR>
 " }}}
 
 "------------------------------------------- end of configs --------------------------------------------
