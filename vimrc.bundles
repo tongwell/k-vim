@@ -34,6 +34,7 @@ Plug 'jlanzarotta/bufexplorer'
 Plug 'vim-scripts/a.vim'
 Plug 'ianva/vim-youdao-translater'
 Plug 'brookhong/cscope.vim'
+Plug 'lervag/vimtex'
 if v:version < 800
     Plug 'scrooloose/syntastic'
 else
