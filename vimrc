@@ -657,7 +657,7 @@ endif
 set background=dark
 set t_Co=256
 
-" colorscheme solarized
+colorscheme solarized
 colorscheme gruvbox
 " colorscheme molokai
 
@@ -676,4 +676,4 @@ highlight clear SpellRare
 highlight SpellRare term=underline cterm=underline
 highlight clear SpellLocal
 highlight SpellLocal term=underline cterm=underline
-highlight Comment term=underline cterm=italic
+highlight Comment term=italic cterm=italic
