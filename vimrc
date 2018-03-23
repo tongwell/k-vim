@@ -95,6 +95,7 @@ set wildignore=*.swp,*.bak,*.pyc,*.class,.svn
 set cursorcolumn
 " 突出显示当前行
 set cursorline
+set cc=80
 
 
 " 设置 退出vim后，内容显示在终端屏幕, 可以用于查看和复制, 不需要可以去掉
@@ -214,6 +215,7 @@ set shiftwidth=4
 set softtabstop=4
 " insert tabs on the start of a line according to shiftwidth, not tabstop 按退格键时可以一次删掉 4 个空格
 set smarttab
+set list lcs=tab:\|\ 
 " 将Tab自动转化成空格[需要输入真正的Tab键时，使用 Ctrl+V + Tab]
 " set expandtab
 " 缩进时，取整 use multiple of shiftwidth when indenting with '<' and '>'
