@@ -28,7 +28,7 @@ endif
 call plug#begin('~/.vim/bundle')
 
 " 移动光标到插件名上, 使用'#'快速跳转到每个插件的配置处
-
+Plug 'Chiel92/vim-autoformat'
 " syntastic
 Plug 'jlanzarotta/bufexplorer'
 Plug 'vim-scripts/a.vim'
@@ -274,9 +274,11 @@ endif
 " this is just for beta version
 if count(g:bundle_groups, 'beta')
     " indent
-    Plug 'nathanaelkane/vim-indent-guides'
+    Plug 'Yggdroot/indentLine'
+    let g:indentLine_setColors = 0
+    " Plug 'nathanaelkane/vim-indent-guides'
     " <leader>ig to trigger
-    let g:indent_guides_start_level = 1
+    let g:indent_guides_start_level = 2
     let g:indent_guides_guide_size = 1
     " let g:indent_guides_auto_colors = 1
     let g:indent_guides_enable_on_vim_startup = 1
