@@ -217,7 +217,7 @@ set softtabstop=4
 set smarttab
 set list lcs=tab:\|\ 
 " 将Tab自动转化成空格[需要输入真正的Tab键时，使用 Ctrl+V + Tab]
-" set expandtab
+set expandtab
 " 缩进时，取整 use multiple of shiftwidth when indenting with '<' and '>'
 set shiftround
 
