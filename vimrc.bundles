@@ -35,11 +35,11 @@ Plug 'vim-scripts/a.vim'
 Plug 'ianva/vim-youdao-translater'
 Plug 'brookhong/cscope.vim'
 Plug 'lervag/vimtex'
-if v:version < 800
+" if v:version < 800
     Plug 'scrooloose/syntastic'
-else
-    Plug 'w0rp/ale'
-endif
+" else
+    " Plug 'w0rp/ale'
+" endif
 
 " Group dependencies, vim-snippets depends on ultisnips
 " 代码片段快速插入 (snippets中,是代码片段资源,需要学习)
