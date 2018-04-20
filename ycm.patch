@@ -1,0 +1,14 @@
+diff --git a/python/ycm/vimsupport.py b/python/ycm/vimsupport.py
+index b974da0..9f50b50 100644
+--- a/python/ycm/vimsupport.py
++++ b/python/ycm/vimsupport.py
+@@ -508,7 +508,8 @@ def JumpToLocation( filename, line, column ):
+     # Thrown when user chooses (A)bort in .swp message box
+     except KeyboardInterrupt:
+       return
+-  vim.current.window.cursor = ( line, column - 1 )
++  if line != 0:
++    vim.current.window.cursor = ( line, column - 1 )
+ 
+   # Center the screen on the jumped-to location
+   vim.command( 'normal! zz' )

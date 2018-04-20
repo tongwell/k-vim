@@ -1,0 +1,20 @@
+diff --git a/ycmd/completers/cpp/clang_completer.py b/ycmd/completers/cpp/clang_completer.py
+index 49ecae50..6a1f8972 100644
+--- a/ycmd/completers/cpp/clang_completer.py
++++ b/ycmd/completers/cpp/clang_completer.py
+@@ -286,13 +286,13 @@ class ClangCompleter( Completer ):
+                                             quoted_include_paths )
+       if include_file_path:
+         return responses.BuildGoToResponse( include_file_path,
+-                                            line_num = 1,
++                                            line_num = 0,
+                                             column_num = 1 )
+ 
+     include_file_path = _GetAbsolutePath( include_file_name, include_paths )
+     if include_file_path:
+       return responses.BuildGoToResponse( include_file_path,
+-                                          line_num = 1,
++                                          line_num = 0,
+                                           column_num = 1 )
+     raise RuntimeError( 'Include file not found.' )
+ 
