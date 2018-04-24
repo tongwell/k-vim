@@ -29,6 +29,8 @@ call plug#begin('~/.vim/bundle')
 
 " 移动光标到插件名上, 使用'#'快速跳转到每个插件的配置处
 Plug 'Chiel92/vim-autoformat'
+Plug 'mhinz/vim-signify'
+Plug 'Shougo/echodoc.vim'
 " syntastic
 Plug 'jlanzarotta/bufexplorer'
 Plug 'vim-scripts/a.vim'
@@ -467,6 +469,8 @@ endif
         \ 'tagbar' : 1,
         \ 'gitcommit' : 1,
         \}
+    let g:EclimCValidate = 0
+    let g:EclimCompletionMethod = 'omnifunc'
 " }}}
 
 
@@ -929,4 +933,7 @@ endif
 nnoremap <leader>t : <C-u>Ydc<CR>
 " }}}
 
+" echodoc {{{
+    let g:echodoc_enable_at_startup = 1
+" }}}
 "------------------------------------------- end of configs --------------------------------------------
