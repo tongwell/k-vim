@@ -295,7 +295,7 @@ if count(g:bundle_groups, 'python')
     Plug 'hdima/python-syntax', {'for': 'python'}
     Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
     Plug 'Glench/Vim-Jinja2-Syntax', {'for': 'python'}
-    " Plug 'davidhalter/jedi-vim'
+    Plug 'davidhalter/jedi-vim', {'for': 'python'}
     " isort  https://github.com/timothycrosley/isort#readme + https://github.com/fisadev/vim-isort#installation
     " pip install isort
     Plug 'fisadev/vim-isort', {'for': 'python'}
@@ -1028,7 +1028,12 @@ nnoremap <leader>t : <C-u>Ydc<CR>
 " }}}
 
 " jedi-vim {{{
+    " use ycm
     let g:jedi#completions_enabled = 0
+    " echodoc
+    let g:jedi#show_call_signatures = ""
+    " nerdtreetabs
+    let g:jedi#usages_command = "<leader>u"
 " }}}
 
 "------------------------------------------- end of configs --------------------------------------------
