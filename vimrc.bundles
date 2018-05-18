@@ -25,23 +25,37 @@ endif
 " vim plugin bundle control, command model
 " ----------------------------------------------------------------------------
 
+let g:is_delay_load = 0
+
 call plug#begin('~/.vim/bundle')
 
 " 移动光标到插件名上, 使用'#'快速跳转到每个插件的配置处
+Plug 'jsfaint/gen_tags.vim'
+Plug 'tongwell/color_coded', {'for': ['c', 'cpp', 'objc', 'objcpp']}
 Plug 'Chiel92/vim-autoformat'
 Plug 'mhinz/vim-signify'
 Plug 'Shougo/echodoc.vim'
 " syntastic
-Plug 'jlanzarotta/bufexplorer'
+" Plug 'jlanzarotta/bufexplorer'
 Plug 'vim-scripts/a.vim'
-Plug 'ianva/vim-youdao-translater'
-Plug 'tongwell/cscope.vim'
-Plug 'lervag/vimtex'
-" if v:version < 800
+if g:is_delay_load
+    Plug 'ianva/vim-youdao-translater', {'on': []}
+else
+    Plug 'ianva/vim-youdao-translater'
+endif
+" Plug 'tongwell/cscope.vim'
+Plug 'lervag/vimtex', {'for': 'tex'}
+if v:version < 800
     Plug 'scrooloose/syntastic'
-" else
-    " Plug 'w0rp/ale'
-" endif
+else
+    if g:is_delay_load
+        Plug 'w0rp/ale', {'on': []}
+    else
+        Plug 'w0rp/ale'
+    endif
+endif
+
+" Plug 'neomake/neomake'
 
 " Group dependencies, vim-snippets depends on ultisnips
 " 代码片段快速插入 (snippets中,是代码片段资源,需要学习)
@@ -52,9 +66,14 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 " 代码自动补全
 " 迄今为止用到的最好的自动VIM自动补全插件
 " 重启 :YcmRestartServer
-Plug 'Valloric/YouCompleteMe'
+if g:is_delay_load
+    Plug 'Valloric/YouCompleteMe', {'on': []}
+else
+    Plug 'Valloric/YouCompleteMe'
+endif
 " 自动补全单引号，双引号等
-Plug 'Raimondi/delimitMate'
+" Plug 'Raimondi/delimitMate'
+Plug 'jiangmiao/auto-pairs'
 " 自动补全html/xml标签
 Plug 'docunext/closetag.vim', { 'for': ['html', 'xml'] }
 
@@ -90,7 +109,11 @@ Plug 'vim-scripts/matchit.zip'
 " m<Space>  del all marks
 " m/        list all marks
 " m.        add new mark just follow previous mark
-Plug 'kshenoy/vim-signature'
+if g:is_delay_load
+    Plug 'kshenoy/vim-signature', {'on': []}
+else
+    Plug 'kshenoy/vim-signature'
+endif
 
 " quick selection and edit
 " expandregion
@@ -102,9 +125,11 @@ Plug 'terryma/vim-multiple-cursors'
 
 " quick locate file or function
 " 文件搜索
-" change to https://github.com/ctrlpvim/ctrlp.vim
-" ctrlp ctrlpfunky
-Plug 'ctrlpvim/ctrlp.vim' | Plug 'tacahiroy/ctrlp-funky'
+if g:is_delay_load
+    Plug 'Yggdroot/LeaderF', {'on': []}
+else
+    Plug 'Yggdroot/LeaderF'
+endif
 " ctrlsf
 " 类似sublimetext的搜索
 " In CtrlSF window:
@@ -134,8 +159,78 @@ Plug 'sjl/gundo.vim'
 " view
 " airline
 " 状态栏增强展示
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+if g:is_delay_load
+    Plug 'vim-airline/vim-airline', {'on': []}
+    Plug 'vim-airline/vim-airline-themes', {'on': []}
+else
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+endif
+
+function! DelayLoadPlug(timer)
+    call plug#load('vim-airline')
+    call plug#load('vim-airline-themes')
+    call plug#load('ale')
+    call plug#load('YouCompleteMe')
+    call plug#load('LeaderF')
+    call plug#load('nerdtree')
+    call plug#load('vim-nerdtree-tabs')
+    call plug#load('vim-signature')
+    call plug#load('vim-youdao-translater')
+endfunction
+
+function! LoadAirline(timer)
+    call plug#load('vim-airline')
+    call plug#load('vim-airline-themes')
+endfunction
+
+function! LoadAle(timer)
+    call plug#load('ale')
+endfunction
+
+function! LoadYcm(timer)
+    call plug#load('YouCompleteMe')
+endfunction
+
+function! LoadLeaderF(timer)
+    call plug#load('LeaderF')
+endfunction
+
+function! LoadNerdtree(timer)
+    call plug#load('nerdtree')
+    call plug#load('vim-nerdtree-tabs')
+endfunction
+
+function! LoadYdt(timer)
+    call plug#load('vim-youdao-translater')
+endfunction
+
+function! LoadSign(timer)
+    call plug#load('vim-signature')
+endfunction
+
+" if has('timers')
+if g:is_delay_load
+    if v:version >= 800
+        augroup delay_load
+            autocmd!
+            " autocmd VimEnter * call timer_start(0, 'DelayLoadPlug') | autocmd! delay_load
+            autocmd VimEnter * call timer_start(100, 'LoadAirline') | autocmd! delay_load
+            autocmd VimEnter * call timer_start(200, 'LoadAle') | autocmd! delay_load
+            autocmd VimEnter * call timer_start(300, 'LoadYcm') | autocmd! delay_load
+            autocmd VimEnter * call timer_start(400, 'LoadLeaderF') | autocmd! delay_load
+            autocmd VimEnter * call timer_start(1000, 'LoadNerdtree') | autocmd! delay_load
+            autocmd VimEnter * call timer_start(2000, 'LoadSign') | autocmd! delay_load
+            autocmd VimEnter * call timer_start(3000, 'LoadYdt') | autocmd! delay_load
+        augroup END
+    else
+        augroup delay_load
+            autocmd!
+            autocmd VimEnter * call DelayLoadPlug('') | autocmd! delay_load
+        augroup END
+    endif
+endif
+
 " rainbow_parentheses
 " 括号显示增强
 Plug 'kien/rainbow_parentheses.vim'
@@ -150,9 +245,13 @@ Plug 'tomasr/molokai'
 
 " nav
 " nerdtree nerdtreetabs
-Plug 'scrooloose/nerdtree' | Plug 'jistr/vim-nerdtree-tabs'
-" ctrlspace
-Plug 'vim-ctrlspace/vim-ctrlspace'
+if g:is_delay_load
+    Plug 'scrooloose/nerdtree', {'on': []}
+    Plug 'jistr/vim-nerdtree-tabs', {'on': []}
+else
+    Plug 'scrooloose/nerdtree'
+    Plug 'jistr/vim-nerdtree-tabs'
+endif
 " tagbar
 Plug 'majutsushi/tagbar'
 
@@ -173,7 +272,7 @@ if count(g:bundle_groups, 'tmux')
 endif
 
 if count(g:bundle_groups, 'markdown')
-    Plug 'plasticboy/vim-markdown', {'for': 'md'}
+    Plug 'plasticboy/vim-markdown', {'for': ['md', 'markdown']}
     " https://github.com/suan/vim-instant-markdown
     " npm -g install instant-markdown-d
     " Plug 'suan/vim-instant-markdown'
@@ -193,13 +292,13 @@ endif
 if count(g:bundle_groups, 'python')
     " for python.vim syntax highlight
     " pythonsyntax
-    Plug 'hdima/python-syntax'
-    Plug 'hynek/vim-python-pep8-indent'
-    Plug 'Glench/Vim-Jinja2-Syntax'
-
+    Plug 'hdima/python-syntax', {'for': 'python'}
+    Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
+    Plug 'Glench/Vim-Jinja2-Syntax', {'for': 'python'}
+    " Plug 'davidhalter/jedi-vim'
     " isort  https://github.com/timothycrosley/isort#readme + https://github.com/fisadev/vim-isort#installation
     " pip install isort
-    Plug 'fisadev/vim-isort'
+    Plug 'fisadev/vim-isort', {'for': 'python'}
     " Shift-V 上下选中, ctrl + i 规范化
     let g:vim_isort_map = '<C-i>'
 endif
@@ -207,14 +306,14 @@ endif
 if count(g:bundle_groups, 'php')
     " piv
     " shift-v可以查看函数手册 / leader-pd生成注释
-    Plug 'spf13/PIV'
+    Plug 'spf13/PIV', {'for': 'php'}
 endif
 
 if count(g:bundle_groups, 'ruby')
-    Plug 'vim-ruby/vim-ruby'
-    Plug 'tpope/vim-rails'
+    Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
+    Plug 'tpope/vim-rails', {'for': 'ruby'}
     " dir / dar
-    Plug 'nelstrom/vim-textobj-rubyblock'
+    Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}
 
     " 有bug, 和当前有冲突, 尚未解决, 不要打开 => TODO: solve this problem
     " Plug 'tpope/vim-endwise'
@@ -223,11 +322,11 @@ endif
 if count(g:bundle_groups, 'javascript')
     " javascript
     " 注意: syntax这个插件要放前面
-    Plug 'othree/yajs.vim' | Plug 'pangloss/vim-javascript'
+    Plug 'othree/yajs.vim', {'for': 'javascript'} | Plug 'pangloss/vim-javascript', {'for': 'javascript'}
     " Plug 'jelera/vim-javascript-syntax' | Plug 'pangloss/vim-javascript'
 
     " TODO: jquery? for, remove or keep
-    Plug 'othree/javascript-libraries-syntax.vim'
+    Plug 'othree/javascript-libraries-syntax.vim', {'for': 'javascript'}
     let g:used_javascript_libs = 'jquery,underscore,backbone'
 
     " for javascript 自动补全, 配合YCM, 需要安装全局环境的（非nvm中) node.js&npm
@@ -387,6 +486,8 @@ if has_key(g:plugs, 'ale')
     let g:ale_linters = {
     \   'python': ['flake8'],
     \   'javascript': ['eslint'],
+    \   'cpp': ['clangcheck'],
+    \   'c': ['clangcheck'],
     \}
 
     " E501 -> 120 chars
@@ -400,6 +501,8 @@ if has_key(g:plugs, 'ale')
     let g:ale_echo_msg_error_str = 'E'
     let g:ale_echo_msg_warning_str = 'W'
     let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+    let g:ale_set_loclist = 0
+    let g:ale_set_quickfix = 1
 
     nmap <silent> <Leader>ep <Plug>(ale_previous_wrap)
     nmap <silent> <Leader>en <Plug>(ale_next_wrap)
@@ -409,10 +512,10 @@ if has_key(g:plugs, 'ale')
     " troggle quickfix list
     function! ToggleErrors()
         let old_last_winnr = winnr('$')
-        lclose
+        cclose
         if old_last_winnr == winnr('$')
             " Nothing was closed, open syntastic_error location panel
-            lopen
+            copen
         endif
     endfunction
     nnoremap <Leader>s :call ToggleErrors()<cr>
@@ -506,8 +609,8 @@ endif
 
 " delimitMate {{{
     " for python docstring ",优化输入
-    au FileType python let b:delimitMate_nesting_quotes = ['"']
-    au FileType php let delimitMate_matchpairs = "(:),[:],{:}"
+    " au FileType python let b:delimitMate_nesting_quotes = ['"']
+    " au FileType php let delimitMate_matchpairs = "(:),[:],{:}"
     " 关闭某些类型文件的自动补全
     "au FileType mail let b:delimitMate_autoclose = 0
 " }}}
@@ -593,39 +696,6 @@ endif
 " }}}
 
 " ################### 功能相关 ###################
-
-" ctrlp ctrlpfunky{{{
-    let g:ctrlp_map = '<leader>p'
-    let g:ctrlp_cmd = 'CtrlP'
-    map <leader>f :CtrlPMRU<CR>
-    let g:ctrlp_custom_ignore = {
-        \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
-        \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
-        \ }
-	let g:ctrlp_working_path_mode = 'ra'
-    let g:ctrlp_match_window_bottom=1
-    let g:ctrlp_max_height=15
-    let g:ctrlp_match_window_reversed=0
-    let g:ctrlp_mruf_max=500
-    let g:ctrlp_follow_symlinks=1
-    " 如果安装了ag, 使用ag
-    " if executable('ag')
-    " " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-    " let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-    " " ag is fast enough that CtrlP doesn't need to cache
-    " let g:ctrlp_use_caching = 0
-    " endif
-
-    " ctrlpfunky
-    " ctrlp插件1 - 不用ctag进行函数快速跳转
-    nnoremap <Leader>fu :CtrlPFunky<Cr>
-    " narrow the list down with a word under cursor
-    nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
-    let g:ctrlp_funky_syntax_highlight = 1
-
-    let g:ctrlp_extensions = ['funky']
-" }}}
-
 
 " ctrlsf {{{
     nmap \ <Plug>CtrlSFCwordPath<CR>
@@ -759,18 +829,6 @@ endif
     let g:nerdtree_tabs_open_on_gui_startup=0
 " }}}
 
-
-" Vim Workspace Controller
-" ctrlspace {{{
-    let g:airline_exclude_preview = 1
-    hi CtrlSpaceSelected guifg=#586e75 guibg=#eee8d5 guisp=#839496 gui=reverse,bold ctermfg=10 ctermbg=7 cterm=reverse,bold
-    hi CtrlSpaceNormal   guifg=#839496 guibg=#021B25 guisp=#839496 gui=NONE ctermfg=12 ctermbg=0 cterm=NONE
-    hi CtrlSpaceSearch   guifg=#cb4b16 guibg=NONE gui=bold ctermfg=9 ctermbg=NONE term=bold cterm=bold
-    hi CtrlSpaceStatus   guifg=#839496 guibg=#002b36 gui=reverse term=reverse cterm=reverse ctermfg=12 ctermbg=8
-    nnoremap <silent><C-p> :CtrlSpace O<CR>
-" }}}
-
-
 " 标签导航
 " tagbar {{{
     nmap <F9> :TagbarToggle<CR>
@@ -820,6 +878,7 @@ endif
         \ 'ctagsbin'  : 'gotags',
         \ 'ctagsargs' : '-sort -silent'
     \ }
+    let g:tagbar_sort = 0
 " }}}
 
 
@@ -887,9 +946,9 @@ endif
     " pip install yapf
     " python code format
     " format all file
-    autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr>
+    " autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr>
     " format select block
-    autocmd FileType python vnoremap <leader>y :!yapf<Cr>
+    " autocmd FileType python vnoremap <leader>y :!yapf<Cr>
 
     " Plug 'posva/vim-vue'
 
@@ -901,27 +960,6 @@ endif
 
 " }}}
 
-" cscope {{{
-	nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
-	nnoremap <leader>l :call ToggleLocationList()<CR>
-	" s: Find this C symbol
-	nnoremap  <leader>fs :call CscopeFind('s', expand('<cword>'))<CR>
-	" g: Find this definition
-	nnoremap  <leader>fg :call CscopeFind('g', expand('<cword>'))<CR>
-	" d: Find functions called by this function
-	nnoremap  <leader>fd :call CscopeFind('d', expand('<cword>'))<CR>
-	" c: Find functions calling this function
-	nnoremap  <leader>fc :call CscopeFind('c', expand('<cword>'))<CR>
-	" t: Find this text string
-	nnoremap  <leader>ft :call CscopeFind('t', expand('<cword>'))<CR>
-	" e: Find this egrep pattern
-	nnoremap  <leader>fe :call CscopeFind('e', expand('<cword>'))<CR>
-	" f: Find this file
-	nnoremap  <leader>ff :call CscopeFind('f', expand('<cword>'))<CR>
-	" i: Find files #including this file
-	nnoremap  <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
-	let g:cscope_silent = 1
-" }}}
 " youdao {{{
 nnoremap <leader>t : <C-u>Ydc<CR>
 " }}}
@@ -929,4 +967,68 @@ nnoremap <leader>t : <C-u>Ydc<CR>
 " echodoc {{{
     let g:echodoc_enable_at_startup = 1
 " }}}
+
+" color_coded {{{
+    " Disable color_coded in diff mode
+    if &diff
+        let g:color_coded_enabled = 0
+    endif
+" }}}
+
+" LeaderF {{{
+    let g:Lf_RootMarkers = ['.root', '.hg', '.svn', '.git']
+    let g:Lf_WorkingDirectoryMode = 'Ac'
+    let g:Lf_ShowRelativePath = 0
+    let g:Lf_WindowHeight = 0.618
+    let g:Lf_PreviewResult = {'Function':0, 'Colorscheme':1}
+    noremap <leader>fm :LeaderfMru<cr>
+    noremap <leader>fu :LeaderfFunction<cr>
+" }}}
+
+" gen_tags {{{
+    " let g:gen_tags#gtags_split = 'h'
+    let g:gen_tags#gtags_auto_gen = 0
+    let g:gen_tags#ctags_auto_gen = 0
+
+    " gtags-cscope
+    " 设 1 表示不使用gtags-cscope
+    " let g:loaded_gentags#gtags = 1
+    set cscopequickfix=s-,g-,d-,c-,t-,e-,f-,i-
+    nnoremap  <leader>fs :silent lcs find s <C-R>=expand('<cword>')<CR><CR>
+    " g: Find this definition
+    nnoremap  <leader>fg :silent lcs find g <C-R>=expand('<cword>')<CR><CR>
+    " d: Find functions called by this function
+    nnoremap  <leader>fd :silent lcs find d <C-R>=expand('<cword>')<CR><CR>
+    " c: Find functions calling this function
+    nnoremap  <leader>fc :silent lcs find c <C-R>=expand('<cword>')<CR><CR>
+    " t: Find this text string
+    nnoremap  <leader>ft :silent lcs find t <C-R>=expand('<cword>')<CR><CR>
+    " e: Find this egrep pattern
+    nnoremap  <leader>fe :silent lcs find e <C-R>=expand('<cword>')<CR><CR>
+    " f: Find this file
+    nnoremap  <leader>ff :silent lcs find f <C-R>=expand('<cword>')<CR><CR>
+    " i: Find files #including this file
+    nnoremap  <leader>fi :silent lcs find i <C-R>=expand('<cword>')<CR><CR>
+
+    function! ToggleLocationList()
+        let l:own = winnr()
+        lw
+        let l:cwn = winnr()
+        if(l:cwn == l:own)
+            if &buftype == 'quickfix'
+                lclose
+            elseif len(getloclist(winnr())) > 0
+                lclose
+            else
+                echohl WarningMsg | echo "No location list." | echohl None
+            endif
+        endif
+    endfunction
+    nnoremap <leader>l :call ToggleLocationList()<CR>
+" }}}
+
+" jedi-vim {{{
+    let g:jedi#completions_enabled = 0
+" }}}
+
 "------------------------------------------- end of configs --------------------------------------------
