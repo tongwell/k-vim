@@ -34,6 +34,7 @@ Plug 'jsfaint/gen_tags.vim'
 Plug 'tongwell/color_coded', {'for': ['c', 'cpp', 'objc', 'objcpp']}
 Plug 'Chiel92/vim-autoformat'
 Plug 'mhinz/vim-signify'
+Plug 'tongwell/vim-signjump'
 Plug 'Shougo/echodoc.vim'
 " syntastic
 " Plug 'jlanzarotta/bufexplorer'
@@ -543,6 +544,9 @@ endif
     " 开启语法关键字补全
     let g:ycm_seed_identifiers_with_syntax=1
 	let g:ycm_confirm_extra_conf = 0
+    let g:ycm_add_preview_to_completeopt = 1
+    let g:ycm_autoclose_preview_window_after_completion = 0
+    let g:ycm_autoclose_preview_window_after_insertion = 1
     " 回车作为选中
     let g:ycm_key_list_stop_completion = ['<CR>']
 
@@ -572,6 +576,7 @@ endif
         \}
     let g:EclimCValidate = 0
     let g:EclimCompletionMethod = 'omnifunc'
+    let g:ycm_log_level='critical'
 " }}}
 
 
@@ -739,6 +744,7 @@ endif
 " }}}
 
 " gundo {{{
+    let g:gundo_prefer_python3 = 1
     noremap <leader>h :GundoToggle<CR>
 " }}}
 
@@ -981,6 +987,7 @@ nnoremap <leader>t : <C-u>Ydc<CR>
     let g:Lf_ShowRelativePath = 0
     let g:Lf_WindowHeight = 0.618
     let g:Lf_PreviewResult = {'Function':0, 'Colorscheme':1}
+    let g:Lf_DefaultMode = 'NameOnly'
     noremap <leader>fm :LeaderfMru<cr>
     noremap <leader>fu :LeaderfFunction<cr>
 " }}}
