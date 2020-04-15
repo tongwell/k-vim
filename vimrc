@@ -86,7 +86,7 @@ if has('persistent_undo')
   " So is persistent undo ...
   set undofile
   " set noundofile
-  " set undodir=/tmp/vimundo/
+  set undodir=~/.vimundo/
 endif
 
 set wildignore=*.swp,*.bak,*.pyc,*.class,.svn

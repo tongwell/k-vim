@@ -745,7 +745,7 @@ endif
 
 " gundo {{{
     let g:gundo_prefer_python3 = 1
-    noremap <leader>h :GundoToggle<CR>
+    noremap <silent> <leader>h :GundoToggle<CR>
 " }}}
 
 " ################### 显示增强 ###################
@@ -999,7 +999,7 @@ nnoremap <leader>t : <C-u>Ydc<CR>
 
     " gtags-cscope
     " 设 1 表示不使用gtags-cscope
-    let g:loaded_gentags#gtags = 1
+    " let g:loaded_gentags#gtags = 1
     set cscopequickfix=s-,g-,d-,c-,t-,e-,f-,i-
     nnoremap  <leader>fs :silent lcs find s <C-R>=expand('<cword>')<CR><CR>
     " g: Find this definition
