@@ -31,7 +31,7 @@ call plug#begin('~/.vim/bundle')
 
 " 移动光标到插件名上, 使用'#'快速跳转到每个插件的配置处
 Plug 'jsfaint/gen_tags.vim'
-Plug 'tongwell/color_coded', {'for': ['c', 'cpp', 'objc', 'objcpp']}
+" Plug 'tongwell/color_coded', {'for': ['c', 'cpp', 'objc', 'objcpp']}
 Plug 'Chiel92/vim-autoformat'
 Plug 'mhinz/vim-signify'
 Plug 'tongwell/vim-signjump'
@@ -559,12 +559,12 @@ endif
 
     " 引入，可以补全系统，以及python的第三方包 针对新老版本YCM做了兼容
     " old version
-    if !empty(glob("~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py"))
+    if !empty(glob("~/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py"))
         let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py"
     endif
     " new version
-    if !empty(glob("~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"))
-        let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
+    if !empty(glob("~/.vim/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py"))
+        let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py"
     endif
 
     " 直接触发自动补全 insert模式下
@@ -976,9 +976,9 @@ nnoremap <leader>t : <C-u>Ydc<CR>
 
 " color_coded {{{
     " Disable color_coded in diff mode
-    if &diff
-        let g:color_coded_enabled = 0
-    endif
+    " if &diff
+        " let g:color_coded_enabled = 0
+    " endif
 " }}}
 
 " LeaderF {{{
