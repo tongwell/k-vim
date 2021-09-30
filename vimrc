@@ -184,7 +184,7 @@ set foldenable
 " syntax    使用语法定义折叠
 " diff      对没有更改的文本进行折叠
 " marker    使用标记进行折叠, 默认标记是 {{{ 和 }}}
-set foldmethod=indent
+set foldmethod=syntax
 set foldlevel=99
 " 代码折叠自定义快捷键 <leader>zz
 let g:FoldMethod = 0
@@ -638,10 +638,10 @@ set lazyredraw          " redraw only when we need to.
 
 " Set extra options when running in GUI mode
 if has("gui_running")
-    set guifont=Monaco:h14
-    if has("gui_gtk2")   "GTK2
-        set guifont=Monaco\ 12,Monospace\ 12
-    endif
+    " set guifont=Monaco:h14
+    " if has("gui_gtk2")   "GTK2
+        " set guifont=Monaco\ 12,Monospace\ 12
+    " endif
     set guioptions-=T
     set guioptions+=e
     set guioptions-=r
