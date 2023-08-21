@@ -555,13 +555,25 @@ endif
             \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
             \ 'cs,lua,javascript': ['re!\w{2}'],
             \ }
-    let g:ycm_language_server = [
-    \   {
-    \     'name': 'clangd',
-    \     'cmdline': ['clangd'],
-    \     'filetypes': [ 'c', 'cpp' ],
-    \   },
-    \ ]
+    " let g:ycm_language_server = [
+    " \   {
+    " \     'name': 'clangd',
+    " \     'cmdline': ['clangd'],
+    " \     'filetypes': [ 'c', 'cpp' ],
+    " \   },
+    " \ ]
+    let g:ycm_clangd_binary_path = '/usr/bin/clangd'
+    let g:ycm_clangd_args = []
+
+    let g:ycm_enable_semantic_highlighting=1
+    call prop_type_add( 'YCM_HL_parameter', { 'highlight': 'Normal' } )
+
+    let g:ycm_enable_inlay_hints=1
+    " let g:ycm_clear_inlay_hints_in_insert_mode=1
+    call prop_type_add( 'YCM_INLAY_Type', { 'highlight': 'Comment' } )
+    call prop_type_add( 'YCM_INLAY_Parameter', { 'highlight': 'Comment' } )
+    call prop_type_add( 'YCM_INLAY_Enum', { 'highlight': 'Comment' } )
+
     " 跳转到定义处, 分屏打开
     " let g:ycm_goto_buffer_command = 'horizontal-split'
     let g:ycm_register_as_syntastic_checker = 0
