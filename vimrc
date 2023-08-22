@@ -668,6 +668,7 @@ colorscheme gruvbox
 hi! link SignColumn   LineNr
 hi! link ShowMarksHLl DiffAdd
 hi! link ShowMarksHLu DiffChange
+hi! link NonText Comment
 
 " for error highlight，防止错误整行标红导致看不清
 highlight clear SpellBad

@@ -569,10 +569,12 @@ endif
     call prop_type_add( 'YCM_HL_parameter', { 'highlight': 'Normal' } )
 
     let g:ycm_enable_inlay_hints=1
+    nnoremap <silent> <leader>eh <Plug>(YCMToggleInlayHints)
     " let g:ycm_clear_inlay_hints_in_insert_mode=1
-    call prop_type_add( 'YCM_INLAY_Type', { 'highlight': 'Comment' } )
-    call prop_type_add( 'YCM_INLAY_Parameter', { 'highlight': 'Comment' } )
-    call prop_type_add( 'YCM_INLAY_Enum', { 'highlight': 'Comment' } )
+    " 下面三句会导致w,f,t等跳转位置不对
+    " call prop_type_add( 'YCM_INLAY_Type', { 'highlight': 'Comment' } )
+    " call prop_type_add( 'YCM_INLAY_Parameter', { 'highlight': 'Comment' } )
+    " call prop_type_add( 'YCM_INLAY_Enum', { 'highlight': 'Comment' } )
 
     " 跳转到定义处, 分屏打开
     " let g:ycm_goto_buffer_command = 'horizontal-split'
