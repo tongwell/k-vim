@@ -728,7 +728,7 @@ endif
 " ################### 功能相关 ###################
 
 " ctrlsf {{{
-    nmap \ <Plug>CtrlSFCwordPath<CR>
+    nmap \ <Plug>CtrlSFCCwordPath
     " let g:ctrlsf_position = 'below'
     " let g:ctrlsf_winsize = '30%'
     let g:ctrlsf_auto_close = 0
@@ -748,6 +748,11 @@ endif
         \ "prev"  : "<C-K>",
         \ "pquit" : "q",
         \ }
+
+    let g:ctrlsf_auto_focus = {
+    \ "at" : "done",
+    \ "duration_less_than": 1000,
+    \ }
 " }}}
 
 " git.  git操作还是习惯命令行,vim里面处理简单diff编辑操作
@@ -1015,6 +1020,7 @@ nnoremap <leader>t : <C-u>Ydc<CR>
     let g:Lf_DefaultMode = 'NameOnly'
     noremap <leader>fm :LeaderfMru<cr>
     noremap <leader>fu :LeaderfFunction<cr>
+    noremap <leader>fw :<C-U><C-R>=printf("Leaderf! rg -w -e %s ", expand("<cword>"))<CR>
 " }}}
 
 " gen_tags {{{
