@@ -30,7 +30,7 @@ let g:is_delay_load = 0
 call plug#begin('~/.vim/bundle')
 
 " 移动光标到插件名上, 使用'#'快速跳转到每个插件的配置处
-Plug 'jsfaint/gen_tags.vim'
+" Plug 'jsfaint/gen_tags.vim'
 " Plug 'tongwell/color_coded', {'for': ['c', 'cpp', 'objc', 'objcpp']}
 Plug 'Chiel92/vim-autoformat'
 Plug 'mhinz/vim-signify'
