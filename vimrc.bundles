@@ -42,7 +42,8 @@ Plug 'vim-scripts/a.vim'
 if g:is_delay_load
     Plug 'ianva/vim-youdao-translater', {'on': []}
 else
-    Plug 'ianva/vim-youdao-translater'
+    " Plug 'ianva/vim-youdao-translater'
+    Plug 'voldikss/vim-translator'
 endif
 " Plug 'tongwell/cscope.vim'
 Plug 'lervag/vimtex', {'for': 'tex'}
@@ -999,8 +1000,11 @@ endif
 
 " }}}
 
-" youdao {{{
-nnoremap <leader>t : <C-u>Ydc<CR>
+" translator {{{
+    " nnoremap <leader>t : <C-u>Ydc<CR>
+    let g:translator_default_engines = ['bing', 'haici', 'youdao']
+    nmap <silent> <Leader>t <Plug>TranslateW
+    vmap <silent> <Leader>t <Plug>TranslateWV
 " }}}
 
 " echodoc {{{
