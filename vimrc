@@ -25,8 +25,8 @@
 "==========================================
 
 " 修改leader键
-let mapleader = ','
-let g:mapleader = ','
+let mapleader = "\<Space>"
+let g:mapleader = "\<Space>"
 
 " 开启语法高亮
 syntax on
@@ -428,7 +428,7 @@ cnoremap <C-e> <End>
 
 " 搜索相关
 " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-map <space> /
+" map <space> /
 " 进入搜索Use sane regexes"
 nnoremap / /\v
 vnoremap / /\v
@@ -613,6 +613,16 @@ function! AutoSetFileHead()
     normal o
 endfunc
 
+" troggle quickfix list
+function! ToggleErrors()
+	let old_last_winnr = winnr('$')
+	cclose
+	if old_last_winnr == winnr('$')
+		" Nothing was closed, open syntastic_error location panel
+		copen
+	endif
+endfunction
+nnoremap <Leader>s :call ToggleErrors()<cr>
 
 " 设置可以高亮的关键字
 if has("autocmd")

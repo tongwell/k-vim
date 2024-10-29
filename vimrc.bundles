@@ -51,9 +51,9 @@ if v:version < 800
     Plug 'scrooloose/syntastic'
 else
     if g:is_delay_load
-        Plug 'w0rp/ale', {'on': []}
+        " Plug 'dense-analysis/ale', {'on': []}
     else
-        Plug 'w0rp/ale'
+        " Plug 'dense-analysis/ale'
     endif
 endif
 
@@ -511,17 +511,6 @@ if has_key(g:plugs, 'ale')
 
     nnoremap <silent> <Leader>ec :ALEToggle<CR>
 
-    " troggle quickfix list
-    function! ToggleErrors()
-        let old_last_winnr = winnr('$')
-        cclose
-        if old_last_winnr == winnr('$')
-            " Nothing was closed, open syntastic_error location panel
-            copen
-        endif
-    endfunction
-    nnoremap <Leader>s :call ToggleErrors()<cr>
-
     let g:ale_set_highlights = 1
     highlight clear ALEErrorSign
     highlight clear ALEWarningSign
@@ -663,7 +652,7 @@ endif
 " }}}
 
 " trailingwhitespace {{{
-    map <leader><space> :FixWhitespace<cr>
+    map <leader><leader><space> :FixWhitespace<cr>
 " }}}
 
 " easyalign {{{
