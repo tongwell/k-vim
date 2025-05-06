@@ -36,6 +36,8 @@ Plug 'Chiel92/vim-autoformat'
 Plug 'mhinz/vim-signify'
 Plug 'tongwell/vim-signjump'
 Plug 'Shougo/echodoc.vim'
+Plug 'github/copilot.vim'
+
 " syntastic
 " Plug 'jlanzarotta/bufexplorer'
 Plug 'vim-scripts/a.vim'
