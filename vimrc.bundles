@@ -238,7 +238,7 @@ endif
 " rainbow_parentheses
 " 括号显示增强
 " Plug 'kien/rainbow_parentheses.vim'
-Plug 'luochen1990/rainbow'
+" Plug 'luochen1990/rainbow'
 " 主题 solarized
 " solarized
 Plug 'altercation/vim-colors-solarized'
@@ -823,7 +823,7 @@ endif
 " }}}
 
 " rainbow {{{
-    let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
+    " let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 " }}}
 
 " ################### 显示增强-主题 ###################"
