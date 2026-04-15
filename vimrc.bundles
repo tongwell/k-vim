@@ -53,9 +53,9 @@ if v:version < 800
     Plug 'scrooloose/syntastic'
 else
     if g:is_delay_load
-        " Plug 'dense-analysis/ale', {'on': []}
+        Plug 'dense-analysis/ale', {'on': []}
     else
-        " Plug 'dense-analysis/ale'
+        Plug 'dense-analysis/ale'
     endif
 endif
 
@@ -241,11 +241,11 @@ endif
 " Plug 'luochen1990/rainbow'
 " 主题 solarized
 " solarized
-Plug 'altercation/vim-colors-solarized'
+" Plug 'altercation/vim-colors-solarized'
 Plug 'morhetz/gruvbox'
 " molokai
 " 主题 molokai
-Plug 'tomasr/molokai'
+" Plug 'tomasr/molokai'
 
 
 " nav
