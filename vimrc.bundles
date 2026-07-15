@@ -491,8 +491,8 @@ if has_key(g:plugs, 'ale')
     let g:ale_linters = {
     \   'python': ['flake8'],
     \   'javascript': ['eslint'],
-    \   'cpp': ['clangcheck'],
-    \   'c': ['clangcheck'],
+    \   'cpp': ['clang-tidy'],
+    \   'c': ['clang-tidy'],
     \}
 
     " E501 -> 120 chars
