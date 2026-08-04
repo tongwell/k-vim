@@ -669,6 +669,10 @@ endif
 set background=dark
 set t_Co=256
 
+if has("termguicolors")
+    set termguicolors
+endif
+
 " colorscheme solarized
 colorscheme gruvbox
 " colorscheme molokai
