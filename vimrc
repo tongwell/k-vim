@@ -157,7 +157,10 @@ set laststatus=2
 " 显示行号
 set number
 " 取消换行
-set nowrap
+" set nowrap
+" 开启inlay hint之后,长行代码w等跳转光标位置异常.开启wrap才能正常跳转
+set wrap
+set linebreak
 
 " 括号配对情况, 跳转并高亮一下匹配的括号
 set showmatch
