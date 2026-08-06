@@ -125,7 +125,8 @@ endif
 Plug 'terryma/vim-expand-region'
 " 多光标选中编辑
 " multiplecursors
-Plug 'terryma/vim-multiple-cursors'
+" Plug 'terryma/vim-multiple-cursors'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 " quick locate file or function
 " 文件搜索
