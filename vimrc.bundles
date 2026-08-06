@@ -380,6 +380,8 @@ if count(g:bundle_groups, 'beta')
     " indent
     Plug 'Yggdroot/indentLine'
     let g:indentLine_setColors = 0
+    let g:vim_json_conceal=0
+    let g:markdown_syntax_conceal=0
     " Plug 'nathanaelkane/vim-indent-guides'
     " <leader>ig to trigger
     let g:indent_guides_start_level = 2
