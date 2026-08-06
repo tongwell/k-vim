@@ -566,6 +566,7 @@ endif
 
     let g:ycm_enable_semantic_highlighting=1
     call prop_type_add( 'YCM_HL_parameter', { 'highlight': 'Normal' } )
+    call prop_type_add( 'YCM_HL_label', { 'highlight': 'Label' } )
 
     let g:ycm_enable_inlay_hints=1
     nnoremap <silent> <leader>eh <Plug>(YCMToggleInlayHints)
